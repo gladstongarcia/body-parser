@@ -54,10 +54,10 @@ Object.defineProperty(exports, 'json', {
  * @public
  */
 
-Object.defineProperty(exports, 'jsonBignumber', {
+Object.defineProperty(exports, 'jsonBigNumber', {
   configurable: true,
   enumerable: true,
-  get: createParserGetter('jsonBignumber')
+  get: createParserGetter('jsonBigNumber')
 })
 
 /**
