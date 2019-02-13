@@ -23,6 +23,7 @@ var parsers = Object.create(null)
 /**
  * @typedef Parsers
  * @type {function}
+ * @property {function} jsonBigNumber
  * @property {function} json
  * @property {function} raw
  * @property {function} text
@@ -46,6 +47,17 @@ Object.defineProperty(exports, 'json', {
   configurable: true,
   enumerable: true,
   get: createParserGetter('json')
+})
+
+/**
+ * JSONBigNumber parser.
+ * @public
+ */
+
+Object.defineProperty(exports, 'jsonBignumber', {
+  configurable: true,
+  enumerable: true,
+  get: createParserGetter('jsonBignumber')
 })
 
 /**
@@ -104,9 +116,15 @@ function bodyParser (options) {
 
   var _urlencoded = exports.urlencoded(opts)
   var _json = exports.json(opts)
+  var _jsonBigNumber = exports.jsonBigNumber(opts)
 
   return function bodyParser (req, res, next) {
     _json(req, res, function (err) {
+      if (err) return next(err)
+      _urlencoded(req, res, next)
+    })
+
+    _jsonBigNumber(req, res, function (err) {
       if (err) return next(err)
       _urlencoded(req, res, next)
     })
@@ -138,10 +156,10 @@ function loadParser (parserName) {
 
   // this uses a switch for static require analysis
   switch (parserName) {
-	case 'jsonBigNumber':
+    case 'jsonBigNumber':
       parser = require('./lib/types/jsonBigNumber')
       break
-	case 'json':
+    case 'json':
       parser = require('./lib/types/json')
       break
     case 'raw':
