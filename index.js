@@ -138,7 +138,10 @@ function loadParser (parserName) {
 
   // this uses a switch for static require analysis
   switch (parserName) {
-    case 'json':
+	case 'jsonBigNumber':
+      parser = require('./lib/types/jsonBigNumber')
+      break
+	case 'json':
       parser = require('./lib/types/json')
       break
     case 'raw':

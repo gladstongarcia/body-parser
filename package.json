@@ -1,5 +1,5 @@
 {
-  "name": "body-parser",
+  "name": "@gladstongarcia/body-parser",
   "description": "Node.js body parsing middleware",
   "version": "1.18.3",
   "contributors": [
@@ -9,6 +9,7 @@
   "license": "MIT",
   "repository": "expressjs/body-parser",
   "dependencies": {
+    "@gladstongarcia/json-bignumber": "^1.0.1",
     "bytes": "3.0.0",
     "content-type": "~1.0.4",
     "debug": "2.6.9",
